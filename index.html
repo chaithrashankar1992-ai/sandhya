@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenleaf Family Clinic – Book an appointment</title>
+<meta name="description" content="Family doctors, paediatrics, women's health and diagnostics under one roof. Book an appointment online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10303a;
+    --muted:#4d6a72;
+    --teal:#0e6b70;
+    --teal-dark:#0a5156;
+    --mint:#dcefea;
+    --paper:#f4f9f8;
+    --white:#ffffff;
+    --line:#c9dcd9;
+    --danger:#b3261e;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;font-size:17px}
+  h1,h2,h3{font-family:"Young Serif",Georgia,serif;font-weight:400;line-height:1.2;margin:0 0 .5em}
+  h1{font-size:clamp(2.2rem,5vw,3.4rem)}
+  h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+  h3{font-size:1.2rem}
+  p{margin:0 0 1em;max-width:62ch}
+  a{color:var(--teal)}
+  :focus-visible{outline:3px solid #f2b705;outline-offset:2px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* Header */
+  header{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+  .brand{font-family:"Young Serif",Georgia,serif;font-size:1.3rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+  .brand svg{width:30px;height:30px}
+  nav{display:flex;gap:22px;align-items:center}
+  nav a{text-decoration:none;color:var(--ink);font-weight:500}
+  nav a:hover{color:var(--teal)}
+  .btn{display:inline-block;background:var(--teal);color:#fff;border:0;padding:13px 24px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s}
+  .btn:hover{background:var(--teal-dark)}
+  .btn[disabled]{opacity:.6;cursor:wait}
+  nav .btn{padding:9px 20px;color:#fff}
+  nav .btn:hover{color:#fff}
+
+  /* Hero + form */
+  .hero{padding:56px 0 64px;background:linear-gradient(180deg,var(--mint) 0,var(--paper) 100%)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:start}
+  .hero p.lead{font-size:1.15rem;color:var(--muted)}
+  .facts{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:12px}
+  .facts li{display:flex;gap:12px;align-items:flex-start}
+  .facts svg{flex:none;width:22px;height:22px;margin-top:3px;color:var(--teal)}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .card h2{font-size:1.5rem}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 5px}
+  input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px}
+  textarea{resize:vertical;min-height:84px}
+  input:focus,select:focus,textarea:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px rgba(14,107,112,.2)}
+  .invalid{border-color:var(--danger)}
+  .err{color:var(--danger);font-size:.85rem;margin-top:4px;min-height:1.1em}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:.92rem;color:var(--muted)}
+  .consent input{width:auto;margin-top:5px}
+  .consent label{margin:0;font-weight:400}
+  form .btn{width:100%;margin-top:18px;font-size:1.05rem}
+  .status{margin-top:14px;padding:12px 14px;border-radius:10px;display:none}
+  .status.ok{display:block;background:var(--mint);color:var(--teal-dark)}
+  .status.fail{display:block;background:#fbe9e7;color:var(--danger)}
+  .hp{position:absolute;left:-9999px}
+  .note{font-size:.85rem;color:var(--muted);margin:14px 0 0}
+
+  /* Sections */
+  section{padding:64px 0}
+  .services{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+  .svc{padding:22px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line)}
+  .svc svg{width:34px;height:34px;color:var(--teal);margin-bottom:10px}
+  .svc p{margin:0;color:var(--muted);font-size:.97rem}
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+  .doc{display:flex;gap:16px;align-items:center}
+  .avatar{flex:none;width:64px;height:64px;border-radius:50%;background:var(--mint);color:var(--teal-dark);display:grid;place-items:center;font-family:"Young Serif",Georgia,serif;font-size:1.3rem}
+  .doc p{margin:0;font-size:.93rem;color:var(--muted)}
+  .doc strong{display:block;font-size:1.05rem}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  table{border-collapse:collapse;width:100%;max-width:420px}
+  td{padding:8px 0;border-bottom:1px solid var(--line)}
+  td:last-child{text-align:right;font-weight:500}
+  .emergency{background:var(--ink);color:#fff;border-radius:var(--radius);padding:24px 28px;margin-top:8px}
+  .emergency a{color:#fff;font-weight:700}
+  footer{padding:28px 0;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+  @media (max-width:860px){
+    .hero-grid,.info{grid-template-columns:1fr}
+    .grid3,.team{grid-template-columns:1fr}
+    nav a:not(.btn){display:none}
+    .row{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Greenleaf Family Clinic home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#0e6b70"/><path d="M13 8h6v5h5v6h-5v5h-6v-5H8v-6h5z" fill="#fff"/></svg>
+      Greenleaf Clinic
+    </a>
+    <nav aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#visit">Visit us</a>
+      <a class="btn" href="#book">Book now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Care for the whole family, close to home.</h1>
+        <p class="lead">Family medicine, children's health, women's health and basic diagnostics in one clinic. Tell us what you need and we will confirm your slot within a few hours.</p>
+        <ul class="facts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Same-day appointments for urgent, non-emergency concerns</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Lab tests, ECG and vaccinations on site</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v12H7l-4 4z"/></svg><span>Video consultations if you cannot travel</span></li>
+        </ul>
+      </div>
+
+      <div class="card" id="book">
+        <h2>Book an appointment</h2>
+        <form id="apptForm" novalidate
+              action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <!-- Spam trap: real visitors never see or fill this -->
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+          <div class="err" data-for="name"></div>
+
+          <div class="row">
+            <div>
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+              <div class="err" data-for="phone"></div>
+            </div>
+            <div>
+              <label for="email">Email (optional)</label>
+              <input id="email" name="email" type="email" autocomplete="email">
+              <div class="err" data-for="email"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="dept">Service</label>
+              <select id="dept" name="service" required>
+                <option value="">Choose a service</option>
+                <option>General check-up</option>
+                <option>Child health and vaccines</option>
+                <option>Women's health</option>
+                <option>Diabetes and heart care</option>
+                <option>Lab tests and ECG</option>
+                <option>Video consultation</option>
+              </select>
+              <div class="err" data-for="dept"></div>
+            </div>
+            <div>
+              <label for="date">Preferred date</label>
+              <input id="date" name="preferred_date" type="date" required>
+              <div class="err" data-for="date"></div>
+            </div>
+          </div>
+
+          <label for="time">Preferred time</label>
+          <select id="time" name="preferred_time">
+            <option>Morning (9 am – 12 pm)</option>
+            <option>Afternoon (12 pm – 4 pm)</option>
+            <option>Evening (4 pm – 7 pm)</option>
+          </select>
+
+          <label for="msg">What is the visit about? (optional)</label>
+          <textarea id="msg" name="message" placeholder="Symptoms, existing conditions, or questions"></textarea>
+
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent">I agree that the clinic may contact me about this request.</label>
+          </div>
+          <div class="err" data-for="consent"></div>
+
+          <button class="btn" type="submit" id="submitBtn">Request appointment</button>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+          <p class="note">This form is for appointments only. In an emergency, call your local emergency number.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <h2>What we treat</h2>
+      <p>Most visits are handled in one sitting, with tests and prescriptions arranged before you leave.</p>
+      <div class="grid3">
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.600-9 9-9 9z"/></svg>
+          <h3>Family medicine</h3>
+          <p>Fevers, infections, blood pressure, thyroid, diabetes and long-term condition reviews.</p>
+        </div>
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="3.500"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg>
+          <h3>Children's health</h3>
+          <p>Growth checks, vaccination schedules, allergies and everyday childhood illness.</p>
+        </div>
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v10"/><circle cx="12" cy="16" r="4"/><path d="M9 19l-2 2M15 19l2 2"/></svg>
+          <h3>Women's health</h3>
+          <p>Antenatal care, cycle concerns, screening and family planning advice.</p>
+        </div>
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>
+          <h3>Heart and ECG</h3>
+          <p>Resting ECG, cholesterol checks and advice on lowering heart risk.</p>
+        </div>
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg>
+          <h3>Lab tests</h3>
+          <p>Blood and urine tests with most reports ready the same day, shared securely online.</p>
+        </div>
+        <div class="svc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>
+          <h3>Video consultation</h3>
+          <p>Follow-ups, prescription renewals and minor concerns from your phone or laptop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctors">
+    <div class="wrap">
+      <h2>Your doctors</h2>
+      <div class="team">
+        <div class="doc"><div class="avatar" aria-hidden="true">AR</div><div><strong>Dr. Anita Rao</strong><p>Family physician, 14 years</p></div></div>
+        <div class="doc"><div class="avatar" aria-hidden="true">SM</div><div><strong>Dr. Samir Mehta</strong><p>Paediatrician, 11 years</p></div></div>
+        <div class="doc"><div class="avatar" aria-hidden="true">LK</div><div><strong>Dr. Leena Kurian</strong><p>Obstetrician and gynaecologist, 16 years</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" style="padding-top:0">
+    <div class="wrap">
+      <div class="info">
+        <div>
+          <h2>Opening hours</h2>
+          <table>
+            <tr><td>Monday – Friday</td><td>9 am – 7 pm</td></tr>
+            <tr><td>Saturday</td><td>9 am – 4 pm</td></tr>
+            <tr><td>Sunday</td><td>Closed</td></tr>
+          </table>
+        </div>
+        <div>
+          <h2>Find us</h2>
+          <p>12 Garden Road, Your City, 000000<br>
+          Phone: <a href="tel:+910000000000">+91 00000 00000</a><br>
+          Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+        </div>
+      </div>
+      <div class="emergency">
+        <strong>Chest pain, trouble breathing or severe bleeding?</strong>
+        Do not wait for an appointment. Call your local emergency number or go to the nearest hospital.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="yr"></span> Greenleaf Family Clinic. This website gives general information and does not replace medical advice.</div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('apptForm');
+  var statusBox = document.getElementById('status');
+  var btn = document.getElementById('submitBtn');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Block past dates
+  var dateInput = document.getElementById('date');
+  var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  dateInput.min = today.toISOString().split('T')[0];
+
+  function setError(id, msg) {
+    var field = document.getElementById(id);
+    var holder = form.querySelector('.err[data-for="' + id + '"]');
+    if (holder) holder.textContent = msg || '';
+    if (field && field.type !== 'checkbox') field.classList.toggle('invalid', !!msg);
+    if (field) field.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+
+  function validate() {
+    var ok = true, first = null;
+    function check(id, bad, msg) {
+      setError(id, bad ? msg : '');
+      if (bad) { ok = false; if (!first) first = document.getElementById(id); }
+    }
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.replace(/[\s\-()]/g, '');
+    var email = document.getElementById('email').value.trim();
+    check('name', name.length < 2, 'Enter your full name.');
+    check('phone', !/^\+?\d{8,15}$/.test(phone), 'Enter a valid phone number, digits only.');
+    check('email', email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), 'Enter a valid email address.');
+    check('dept', !document.getElementById('dept').value, 'Choose a service.');
+    check('date', !dateInput.value || dateInput.value < dateInput.min, 'Choose today or a future date.');
+    check('consent', !document.getElementById('consent').checked, 'Tick the box so we can contact you.');
+    if (first) first.focus();
+    return ok;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    statusBox.className = 'status';
+    if (!validate()) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      statusBox.textContent = 'Request sent. We will call you within a few hours to confirm your slot.';
+      statusBox.className = 'status ok';
+    }).catch(function () {
+      statusBox.textContent = 'We could not send your request. Please call us on +91 00000 00000.';
+      statusBox.className = 'status fail';
+    }).finally(function () {
+      btn.disabled = false;
+      btn.textContent = 'Request appointment';
+    });
+  });
+})();
+</script>
+</body>
+</html>
